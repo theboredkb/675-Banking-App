@@ -1,6 +1,6 @@
 const mysql = require('mysql2/promise')
 
-const pool = mysql.createPool({
+export const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: 'password',
@@ -14,7 +14,6 @@ async function createTables() {
   try {
     const conn = await pool.getConnection()
     await conn.beginTransaction()
-
     // Create User table
     await conn.query(`
       CREATE TABLE IF NOT EXISTS User (

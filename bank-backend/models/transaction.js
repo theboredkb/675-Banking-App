@@ -1,5 +1,3 @@
-import { getTransactionsByUserId } from '../utils/_dbloader'
-
 function createFakeTransaction() {
   return {
     id: Math.random() * 1000,
@@ -10,7 +8,7 @@ function createFakeTransaction() {
   }
 }
 
-//id: number
+//amount: number
 export function getFakeTransactions(amount) {
   return Array(amount).fill(createFakeTransaction())
 }
