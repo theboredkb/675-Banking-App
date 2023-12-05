@@ -67,3 +67,5 @@ router.post("/auth/signup", bodyParser.urlencoded(), async(req,res) => {
         res.redirect("/signup")
     }
 })
+
+module.exports = router;
