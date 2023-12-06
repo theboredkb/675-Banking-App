@@ -1,4 +1,5 @@
 import { Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
 const Homepage = () => {
     return (
@@ -9,13 +10,13 @@ const Homepage = () => {
         </div>
         <br></br>
         <div>
-            <p>Serving %totalCustomers% customers since 2004.</p>
-            <p>Protecting $%totalMoney% worth of assets.</p>
-            <br></br>
-            <br></br>
-            <Button variant='primary'>
-                Customer Login
-            </Button>
+          <p>Serving %totalCustomers% customers since 2004.</p>
+          <p>Protecting $%totalMoney% worth of assets.</p>
+          <br></br>
+          <br></br>
+          <Link to="/Login">
+            <Button variant="primary">Customer Login</Button>
+          </Link>
         </div>
       </div>
     );
