@@ -6,8 +6,9 @@ const transferRoute = require("./routes/transfers.js");
 const trasnactionRoute = require("./routes/transactions.js");
 const app = express()
 
-// Start server
 const PORT = process.env.PORT || 3000
+
+app.use(express.json());
 
 app.use("/user",userRoute)
 app.use("/transfer",transferRoute)

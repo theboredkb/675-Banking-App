@@ -6,7 +6,7 @@ const router = express.Router();
 //new transaction
 router.post("/new", bodyParser.urlencoded(), async(req,res) => {
     const { type, amount, cust_id  } = req.body
-    const new_transaction =  await transaction_data.insertOne({trasnaction_type: type, transaction_amount: amount, customer_id: cust_id})
+    const new_transaction =  await transaction_data.create({trasnaction_type: type, transaction_amount: amount, customer_id: cust_id})
     return res.status(200).json(new_transaction)
 })
 
