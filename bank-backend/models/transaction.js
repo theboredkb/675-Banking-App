@@ -1,23 +1,25 @@
-function createFakeTransaction() {
-  return {
-    id: Math.random() * 1000,
-    userId: fakeTransactions.length + 1,
-    amount: Math.random * 1000000,
-    type: 'deposit',
-    createdAt: Date.now(),
-  }
-}
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-//amount: number
-export function getFakeTransactions(amount) {
-  return Array(amount).fill(createFakeTransaction())
-}
+const transaction_schema = new Schema({
+    //transaction id = mongo generated _id
+    //transaction date + time = mongo generated date + time
+    sender_uid: {
+        type: String,
+        require: true
+    },
+    reciever_uid: {
+        type: String,
+        require:true
+    },
+    transaction_type: {
+        type: String,
+        require: true
+    },
+    amount: {
+        type: Number,
+        require: true
+    }
+}, {timestamps: true});
 
-//id: number
-export function getTransaction(id) {
-  try {
-    getTransactionsByUserId(id)
-  } catch (e) {
-    console.error(e)
-  }
-}
+module.exports = mongoose.model("transaction_data", transaction_schema);
