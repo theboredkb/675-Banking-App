@@ -1,6 +1,5 @@
 const express = require("express");
-const user = require("../mongo_modes/user_mongo.js");
-const user_account = require("../mongo_models/user_account_mongo.js");
+const user_account = require("../models/user");
 const bodyParser = require("body-parser");
 const router = express.Router();
 

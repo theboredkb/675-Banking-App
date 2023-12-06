@@ -4,20 +4,16 @@ const Schema = mongoose.Schema;
 const transaction_schema = new Schema({
     //transaction id = mongo generated _id
     //transaction date + time = mongo generated date + time
-    sender_uid: {
-        type: String,
-        require: true
-    },
-    reciever_uid: {
-        type: String,
-        require:true
-    },
     transaction_type: {
         type: String,
         require: true
     },
-    amount: {
+    transaction_amount: {
         type: Number,
+        require: true
+    },
+    customer_id: {
+        type: String,
         require: true
     }
 }, {timestamps: true});
