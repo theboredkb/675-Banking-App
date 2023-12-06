@@ -50,17 +50,9 @@ router.post("/auth/signup", bodyParser.urlencoded(), async(req,res) => {
         res.redirect("/signup")
     }
 
-    //create a new account with the user
-    let new_account
-    try{
-        new_account = await user_account.insertOne({user_username: username, user_password: password, balance: 0})
-    }catch (error){
-        res.redirect("/signup")
-    }
-    
     //register the user info
     try{
-        const new_user = await user.insertOne({user_SSN: SSN, user_email: email, first_name: firstname, last_name: lastname, user_DOB: dob, user_accountID: new_account._id})
+        const new_user = await user.insertOne({user_SSN: SSN, user_email: email, first_name: firstname, last_name: lastname, user_DOB: dob})
         res.redirect("/login")
     }catch (error){
         res.redirect("/signup")
