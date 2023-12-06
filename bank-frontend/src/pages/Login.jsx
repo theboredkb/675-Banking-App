@@ -7,6 +7,23 @@ const LoginPage = () => {
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
+    const validateEmail = () => {
+      // Check if this is a valid sfsu email
+      const emailRegex = /@sfsu\.edu$/;
+      return email && emailRegex.test(email);
+    };
+
+    const validatePassword = () => {
+      //Checks is the length of the password entered is at least 8 or more characters long
+      return password && password.length >= 8;
+    };
+
+    const isFormValid = () => {
+      // Check if both email and password are not empty
+      return email && password;
+    };
+
+
     const handleValidation = (event) => {
       const form = event.currentTarget;
       if (form.checkValidity() === false) {
@@ -75,11 +92,20 @@ const LoginPage = () => {
 
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <p> </p>
-              <Button variant="primary" type="submit">
+              <Link to="/home">
+                <Button variant="primary">
+                    Log in
+                </Button>
+              </Link>
+              {/* <Button variant="primary" type="submit">
                 Log in
-              </Button>
-              
+              </Button> */}
+
               <br></br>
+              <br></br>
+
+              <p>Temp: Login form leads to main user page and transactions</p>
+
               <br></br>
 
               <Link to="/">
