@@ -16,7 +16,7 @@ const user_info_schema = new Schema({
         require: true
     },
     balance: {
-        type: number,
+        type: Number
     },
     user_email: {
         type: String,

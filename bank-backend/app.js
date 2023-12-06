@@ -1,10 +1,10 @@
+require('dotenv').config();
 const express = require('express')
 const mongoose = require("mongoose");
 const userRoute = require("./routes/users.js");
-const transferRoute = require("./routes/trasnfers.js");
+const transferRoute = require("./routes/transfers.js");
 const trasnactionRoute = require("./routes/transactions.js");
 const app = express()
-//const mysql = require('mysql2/promise')
 
 // Start server
 const PORT = process.env.PORT || 3000
