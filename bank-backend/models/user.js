@@ -31,7 +31,7 @@ const user_info_schema = new Schema({
         require: true
     },
     user_DOB: {
-        type: Date,
+        type: String,
         require: true
     },
 });
