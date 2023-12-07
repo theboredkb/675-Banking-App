@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useFormAction } from "react-router-dom";
 import {Card, Form, Button, FloatingLabel} from "react-bootstrap";
 import { useState } from "react";
 
@@ -46,7 +46,7 @@ const LoginPage = () => {
         <Card.Title>Login</Card.Title>
         <Card.Body>
           {/* Login form provided by react-bootstrap */}
-          <Form noValidate validated={validated} onSubmit={handleValidation}>
+          <Form noValidate validated={validated} onSubmit={handleValidation}> 
             {/* Email Address form */}
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <FloatingLabel
@@ -56,6 +56,7 @@ const LoginPage = () => {
                 label="Email Address">
                 <Form.Control
                   required
+                  name="email"
                   type="email"
                   placeholder="Email Address"
                   value={email || ""}
@@ -79,6 +80,7 @@ const LoginPage = () => {
                 controlId="formBasicPassword"
                 label="Password">
                 <Form.Control
+                  name="password"
                   type="password"
                   placeholder="Password"
                   value={password || ""}
@@ -92,14 +94,10 @@ const LoginPage = () => {
 
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <p> </p>
-              <Link to="/home">
-                <Button variant="primary">
-                    Log in
-                </Button>
-              </Link>
-              {/* <Button variant="primary" type="submit">
+
+              <Button variant="primary" type="submit">
                 Log in
-              </Button> */}
+              </Button> 
 
               <br></br>
               <br></br>
@@ -107,10 +105,6 @@ const LoginPage = () => {
               <p>Temp: Login form leads to main user page and transactions</p>
 
               <br></br>
-
-              <Link to="/">
-                <a>Return Home</a>
-              </Link>
             </Form.Group>
           </Form>
         </Card.Body>

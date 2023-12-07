@@ -9,21 +9,16 @@ router.post("/login", async(req,res) => {
     const { email, password }  = req.body;
     console.log("form submitted:", {email, password});
 
-    const email_response = await user.findOne({user_email: email})
+    const email_response = await user_account.findOne({user_email: email})
 
     if(!email_response){
-        res.redirect("/login")
+        return res.status(400).json({error: "email"})
     }
 
-    //probably couldve used an aggregate/join here idk
-    const account_response = await user_account.findOne({_id: email_response.user_accountID})
-
-    if(!account_response){
-        res.redirect("/login")
-    } else if (password != account_response.user_password){
-        res.redirect("/login")
+    if (password != email_response.user_password){
+        return res.status(400).json({error: "password"})
     } else {
-        res.redirect("/")
+        return res.status(200).json(email_response)
     }
 })
 

@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.use("/user",userRoute)
 app.use("/transfer",transferRoute)
-app.use("/transactions",trasnactionRoute)
+app.use("/transaction",trasnactionRoute)
 
 mongoose.connect(process.env.mongo_url)
   .then(() =>{
