@@ -45,26 +45,6 @@ const MainMenuPage = () => {
               <h3>Deposit</h3>
               <p>$100</p>
             </ListGroup.Item>
-
-            <ListGroup.Item>
-              <h3>Withdrawl</h3>
-              <p>$25</p>
-            </ListGroup.Item>
-
-            <ListGroup.Item>
-              <h3>Withdrawl</h3>
-              <p>$45</p>
-            </ListGroup.Item>
-
-            <ListGroup.Item>
-              <h3>Withdrawl</h3>
-              <p>$80</p>
-            </ListGroup.Item>
-
-            <ListGroup.Item>
-              <h3>Deposit</h3>
-              <p>$700</p>
-            </ListGroup.Item>
           </ListGroup>
         </Card.Body>
       </Card>

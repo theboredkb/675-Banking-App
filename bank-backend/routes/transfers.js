@@ -1,12 +1,13 @@
 const express = require("express");
-const transaction_data = require("../models/transfer.js");
+const transfer_data = require("../models/transfer.js");
+const transaction_data = require("../models/transaction.js");
 const bodyParser = require("body-parser");
 const router = express.Router();
 
 router.post("/new", bodyParser.urlencoded(), async(req,res) => {
-    const { type, amount, cust_id  } = req.body
-    const new_transaction =  await transaction_data.create({trasnaction_type: type, transaction_amount: amount, customer_id: cust_id})
-    return res.status(200).json(new_transaction)
+    const { sent_id, recieve_id, amount  } = req.body
+    const new_transfer =  await transfer_data.create({sent_to: recieve_id, sent_from: sent_id, amount: amount})
+    return res.status(200).json(new_transfer)
 })
 
 module.exports = router;

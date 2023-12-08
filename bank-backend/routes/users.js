@@ -54,10 +54,42 @@ router.post("/signup", bodyParser.urlencoded(), async(req,res) => {
 
     //register the user info
     try{
-        const new_user = await user_account.create({user_SSN: SSN, user_email: email, first_name: firstname, last_name: lastname, user_DOB: dob, user_password: password, balance: 0})
-        return res.status(200).json(new_user)
+        const new_user = await user_account.create({user_SSN: SSN, user_username: username, user_email: email, first_name: firstname, last_name: lastname, user_DOB: dob, user_password: password, balance: 0})
+        res.status(200).json(new_user)
     }catch (error){
         return res.status(400).json({error: "idk something went wrong"})
+    }
+})
+
+//update user
+router.put("/edit/:id",bodyParser.urlencoded(), async(req,res) => {
+    const { id } = req.params
+    const edit_user = await user_account.findOneAndUpdate({_id:id}, {...req.body})
+
+    if(!edit_user){
+        return res.status(404)
+    }
+
+    res.status(200).json(edit_user)
+})
+
+//delete user
+router.delete("/delete/:id",bodyParser.urlencoded(), async(req,res) => {
+    const { id } = req.params
+    const deleted_user = await user_account.findOneAndDelete({_id:id})
+
+    if(!deleted_user_user){
+        return res.status(404)
+    }
+
+    res.status(200).json(deleted_user)
+})
+
+router.post("/logout", async(req,res) => {
+    try {
+        await req.session.destroy()
+    } catch (err) {
+        return res.status(400).json({error: error.message})
     }
 })
 
