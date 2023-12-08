@@ -46,7 +46,7 @@ const LoginPage = () => {
         <Card.Title>Login</Card.Title>
         <Card.Body>
           {/* Login form provided by react-bootstrap */}
-          <Form noValidate validated={validated} onSubmit={handleValidation}> 
+          <Form noValidate validated={validated} onSubmit={handleValidation} action="/user/login" method="POST"> 
             {/* Email Address form */}
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <FloatingLabel

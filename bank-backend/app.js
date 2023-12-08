@@ -1,12 +1,29 @@
 require('dotenv').config();
 const express = require('express')
 const mongoose = require("mongoose");
+const session = require("express-session");
+const MongoDBStore = require("connect-mongo");
 const userRoute = require("./routes/users.js");
 const transferRoute = require("./routes/transfers.js");
 const trasnactionRoute = require("./routes/transactions.js");
 const app = express()
 
 const PORT = process.env.PORT || 3000
+
+const day = 1000 * 60 * 60 * 24 //1 day in milliseconds 
+app.use(session({
+  secret: 'fdahvx1qp6m66k3u',
+  cookie: {
+    maxAge: day 
+  },
+  store: MongoDBStore.create({
+    mongoUrl: process.env.mongo_url,
+    collection: 'my_sessions',
+    autoRemove: 'native'
+  }),
+  resave: true,
+  saveUninitialized: false
+}));
 
 app.use(express.json());
 

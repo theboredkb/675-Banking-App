@@ -3,8 +3,8 @@ const user_account = require("../models/user");
 const bodyParser = require("body-parser");
 const router = express.Router();
 
-// /auth/login WIP cuz idk what to put
-router.post("/login", async(req,res) => {
+// login 
+router.post("/login",bodyParser.urlencoded(), async(req,res) => {
     //if we use username for login that would make my life easier
     const { email, password }  = req.body;
     console.log("form submitted:", {email, password});
@@ -18,11 +18,12 @@ router.post("/login", async(req,res) => {
     if (password != email_response.user_password){
         return res.status(400).json({error: "password"})
     } else {
+        req.session.user_ID = email_response._id;
         return res.status(200).json(email_response)
     }
 })
 
-// /auth/signup is just whatever until we figure out something else
+// signup 
 router.post("/signup", bodyParser.urlencoded(), async(req,res) => {
     //these fields WIP
     const { SSN, firstname, lastname, username, email, password, dob } = req.body
