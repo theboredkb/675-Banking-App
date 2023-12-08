@@ -35,9 +35,14 @@ const MainMenuPage = () => {
         <Link to="/">
             <a>Logout</a>
         </Link>
+        <Link to="/transactions">
+            <a>Make a Withdrawl or Deposit</a>
+        </Link>
+          <h3>Recent Transactions</h3>
           <h1>$ {info.balance}</h1>
           <h3>Total Balance</h3>
-          <h3>Recent Transactions</h3>
+
+
           <ListGroup>
               {info.user_transactions.map((transaction_data,index) => (
                 <ListGroup.Item key = {index}>
