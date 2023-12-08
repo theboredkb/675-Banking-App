@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const MongoDBStore = require("connect-mongo");
+const mainRoute = require("./routes/mainpage.js");
 const userRoute = require("./routes/users.js");
 const transferRoute = require("./routes/transfers.js");
 const trasnactionRoute = require("./routes/transactions.js");
@@ -29,6 +30,7 @@ app.use(session({
 app.use(cookieParser());
 app.use(express.json());
 
+app.use("/main",mainRoute)
 app.use("/user",userRoute)
 app.use("/transfer",transferRoute)
 app.use("/transaction",trasnactionRoute)

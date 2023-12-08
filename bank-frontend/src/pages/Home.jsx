@@ -1,7 +1,26 @@
 import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
 
 const Homepage = () => {
+  const [info, setMainPageInfo] = useState([]);
+  useEffect(() => {
+    const fetchMainPageInfo = async () => {
+      try {
+        const response = await fetch("/main/home_info");
+        if (response.ok) {
+          const data = await response.json();
+          setMainPageInfo(data);
+        } else {
+          throw new Error('Failed to fetch user info');
+        }
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+    };
+
+    fetchMainPageInfo();
+  }, []);
     return (
       <div className="content">
         <div>
@@ -10,8 +29,8 @@ const Homepage = () => {
         </div>
         <br></br>
         <div>
-          <p>Serving %totalCustomers% customers since 2004.</p>
-          <p>Protecting $%totalMoney% worth of assets.</p>
+          <p>Serving { info.users } customers since 2004.</p>
+          <p>Protecting $ { info.balance } worth of assets.</p>
           <br></br>
           <br></br>
           <Link to="/Login">
