@@ -8,10 +8,12 @@ const MainMenuPage = () => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await fetch("/user/userinfo");
+        const response = await fetch("/user/user_transactions");
         if (response.ok) {
           const data = await response.json();
-          setUserInfo(data);
+          var real_data = data[0]
+          console.log(real_data)
+          setUserInfo(real_data);
         } else {
           throw new Error('Failed to fetch user info');
         }
@@ -35,16 +37,15 @@ const MainMenuPage = () => {
         </Link>
           <h1>$ {info.balance}</h1>
           <h3>Total Balance</h3>
-
-          <br></br>
-          <br></br>
-
           <h3>Recent Transactions</h3>
           <ListGroup>
-            <ListGroup.Item>
-              <h3>Deposit</h3>
-              <p>$100</p>
-            </ListGroup.Item>
+              {info.user_transactions.map((transaction_data,index) => (
+                <ListGroup.Item key = {index}>
+                  <h3>{transaction_data.transaction_type}</h3>
+                  <p>{transaction_data.transaction_amount}</p>
+                </ListGroup.Item>
+              ))}
+            
           </ListGroup>
         </Card.Body>
       </Card>

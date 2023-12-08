@@ -1,6 +1,5 @@
 const express = require("express");
 const transfer_data = require("../models/transfer.js");
-const transaction_data = require("../models/transaction.js");
 const bodyParser = require("body-parser");
 const router = express.Router();
 

@@ -3,7 +3,30 @@ const user_account = require("../models/user");
 const bodyParser = require("body-parser");
 const router = express.Router();
 
-router.get("/userinfo",async(req,res) => {
+//get info to display in main menu
+router.get("/user_transactions",async(req,res) => {
+    const user = req.session.username;
+    const user_with_transactions = await user_account.aggregate([
+        {
+            $match: {
+                "user_username": user
+            }
+        },
+        {
+            $lookup:{
+                from: "transaction_datas",
+                localField: "_id",
+                foreignField: "customer_id",
+                as: "user_transactions"
+                
+            }
+        }
+    ])
+    console.log(user_with_transactions)
+    res.status(200).json((user_with_transactions))
+})
+
+router.get("/user_info",async(req,res) => {
     const uid = req.session.user_ID;
     const uid_response = await user_account.findOne({_id: uid});
     console.log(uid_response)
@@ -25,6 +48,7 @@ router.post("/login",bodyParser.urlencoded(), async(req,res) => {
         res.redirect(400,"/login")
     } else {
         req.session.user_ID = email_response._id;
+        req.session.username = email_response.user_username;
         res.redirect(200,"/home")
     }
 })

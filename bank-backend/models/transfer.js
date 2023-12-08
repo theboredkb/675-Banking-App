@@ -5,11 +5,11 @@ const transaction_schema = new Schema({
     //transaction id = mongo generated _id
     //transaction date + time = mongo generated date + time
     sent_to: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         require: true
     },
     sent_from: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         require:true
     },
     amount: {

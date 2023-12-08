@@ -13,7 +13,7 @@ const transaction_schema = new Schema({
         require: true
     },
     customer_id: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         require: true
     }
 }, {timestamps: true});
