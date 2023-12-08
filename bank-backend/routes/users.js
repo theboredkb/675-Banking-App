@@ -5,8 +5,9 @@ const router = express.Router();
 
 router.get("/userinfo",async(req,res) => {
     const uid = req.session.user_ID;
-    const uid_response = await user_account.findOne({user_ID: uid});
-    return res.status(400).json(uid_response);
+    const uid_response = await user_account.findOne({_id: uid});
+    console.log(uid_response)
+    return res.status(200).json(uid_response);
 })
 
 // login 
@@ -24,7 +25,7 @@ router.post("/login",bodyParser.urlencoded(), async(req,res) => {
         res.redirect(400,"/login")
     } else {
         req.session.user_ID = email_response._id;
-        res.redirect(200,"/MainMenu")
+        res.redirect(200,"/home")
     }
 })
 

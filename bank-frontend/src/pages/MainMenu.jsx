@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { Card, Form, Button, FloatingLabel, ListGroup } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const MainMenuPage = () => {
+  
   const [info, setUserInfo] = useState([]);
   useEffect(() => {
-    
     const fetchUserInfo = async () => {
       try {
         const response = await fetch("/user/userinfo");
@@ -22,19 +22,18 @@ const MainMenuPage = () => {
 
     fetchUserInfo();
   }, []);
-
   return (
     <>
       <Card className="mainMenu">
         <Card.Header>
-          <Card.Title>Welcome {info.user_name}</Card.Title>
+          <Card.Title>Welcome {info.first_name} {info.last_name}</Card.Title>
         </Card.Header>
 
         <Card.Body>
         <Link to="/">
             <a>Logout</a>
         </Link>
-          <h1>{info.balance}</h1>
+          <h1>$ {info.balance}</h1>
           <h3>Total Balance</h3>
 
           <br></br>

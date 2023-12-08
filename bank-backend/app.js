@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express')
 const mongoose = require("mongoose");
 const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const MongoDBStore = require("connect-mongo");
 const userRoute = require("./routes/users.js");
 const transferRoute = require("./routes/transfers.js");
@@ -25,6 +26,7 @@ app.use(session({
   saveUninitialized: false
 }));
 
+app.use(cookieParser());
 app.use(express.json());
 
 app.use("/user",userRoute)

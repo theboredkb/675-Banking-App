@@ -93,8 +93,7 @@ const LoginPage = () => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <p> </p>
-
+              <p></p>
               <Button variant="primary" type="submit">
                 Log in
               </Button> 
@@ -102,9 +101,8 @@ const LoginPage = () => {
               <br></br>
               <br></br>
 
-              <p>Temp: Login form leads to main user page and transactions</p>
-
               <br></br>
+
             </Form.Group>
           </Form>
         </Card.Body>
