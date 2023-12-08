@@ -3,18 +3,38 @@ import { Card, Form, Button, FloatingLabel, ListGroup } from "react-bootstrap";
 import { useState } from "react";
 
 const MainMenuPage = () => {
+  const [info, setUserInfo] = useState([]);
+  useEffect(() => {
+    
+    const fetchUserInfo = async () => {
+      try {
+        const response = await fetch("/user/userinfo");
+        if (response.ok) {
+          const data = await response.json();
+          setUserInfo(data);
+        } else {
+          throw new Error('Failed to fetch user info');
+        }
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+    };
+
+    fetchUserInfo();
+  }, []);
+
   return (
     <>
       <Card className="mainMenu">
         <Card.Header>
-          <Card.Title>Welcome %username%</Card.Title>
+          <Card.Title>Welcome {info.user_name}</Card.Title>
         </Card.Header>
 
         <Card.Body>
         <Link to="/">
             <a>Logout</a>
         </Link>
-          <h1>$%totalAccountBalance%</h1>
+          <h1>{info.balance}</h1>
           <h3>Total Balance</h3>
 
           <br></br>

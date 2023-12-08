@@ -3,23 +3,28 @@ const user_account = require("../models/user");
 const bodyParser = require("body-parser");
 const router = express.Router();
 
+router.get("/userinfo",async(req,res) => {
+    const uid = req.session.user_ID;
+    const uid_response = await user_account.findOne({user_ID: uid});
+    return res.status(400).json(uid_response);
+})
+
 // login 
 router.post("/login",bodyParser.urlencoded(), async(req,res) => {
-    //if we use username for login that would make my life easier
     const { email, password }  = req.body;
     console.log("form submitted:", {email, password});
 
     const email_response = await user_account.findOne({user_email: email})
 
     if(!email_response){
-        return res.status(400).json({error: "email"})
+        res.redirect(400,"/login")
     }
 
     if (password != email_response.user_password){
-        return res.status(400).json({error: "password"})
+        res.redirect(400,"/login")
     } else {
         req.session.user_ID = email_response._id;
-        return res.status(200).json(email_response)
+        res.redirect(200,"/MainMenu")
     }
 })
 
