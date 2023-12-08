@@ -11,12 +11,14 @@ const MainMenuPage = () => {
         </Card.Header>
 
         <Card.Body>
-        <Link to="/">
+          <Link to="/">
             <a>Logout</a>
-        </Link>
+          </Link>
           <h1>$%totalAccountBalance%</h1>
           <h3>Total Balance</h3>
-
+          <Link to="/transactions">
+            <a>Make a Withdrawl or Deposit</a>
+          </Link>
           <br></br>
           <br></br>
 
