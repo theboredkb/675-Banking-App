@@ -3,17 +3,14 @@ import { Card, Form, Button, FloatingLabel, ListGroup } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
 const MainMenuPage = () => {
-  
-  const [info, setUserInfo] = useState([]);
+  const [info, setMainPageInfo] = useState([]);
   useEffect(() => {
-    const fetchUserInfo = async () => {
+    const fetchMainPageInfo = async () => {
       try {
         const response = await fetch("/user/user_transactions");
         if (response.ok) {
           const data = await response.json();
-          var real_data = data[0]
-          console.log(real_data)
-          setUserInfo(real_data);
+          setMainPageInfo(data);
         } else {
           throw new Error('Failed to fetch user info');
         }
@@ -22,7 +19,7 @@ const MainMenuPage = () => {
       }
     };
 
-    fetchUserInfo();
+    fetchMainPageInfo();
   }, []);
   return (
     <>

@@ -5,7 +5,7 @@ const router = express.Router();
 
 //get info to display in main menu
 router.get("/user_transactions",async(req,res) => {
-    const user = req.session.username;
+    const { user } = req.body;
     const user_with_transactions = await user_account.aggregate([
         {
             $match: {
@@ -26,13 +26,6 @@ router.get("/user_transactions",async(req,res) => {
     res.status(200).json((user_with_transactions))
 })
 
-router.get("/user_info",async(req,res) => {
-    const uid = req.session.user_ID;
-    const uid_response = await user_account.findOne({_id: uid});
-    console.log(uid_response)
-    return res.status(200).json(uid_response);
-})
-
 // login 
 router.post("/login",bodyParser.urlencoded(), async(req,res) => {
     const { email, password }  = req.body;
@@ -47,6 +40,7 @@ router.post("/login",bodyParser.urlencoded(), async(req,res) => {
     if (password != email_response.user_password){
         res.redirect(400,"/login")
     } else {
+        console.log(email_response.user_username + " logged in")
         req.session.user_ID = email_response._id;
         req.session.username = email_response.user_username;
         res.redirect(200,"/home")
@@ -100,7 +94,7 @@ router.put("/edit/:id",bodyParser.urlencoded(), async(req,res) => {
 //delete user
 router.delete("/delete/:id",bodyParser.urlencoded(), async(req,res) => {
     const { id } = req.params
-    const deleted_user = await user_account.findOneAndDelete({_id:id})
+    const deleted_user = await user_account.findByIdAndDelete(id)
 
     if(!deleted_user_user){
         return res.status(404)

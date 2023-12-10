@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
 
 const Homepage = () => {
-  const [info, setMainPageInfo] = useState([]);
+  const [info, setHomePageInfo] = useState([]);
   useEffect(() => {
-    const fetchMainPageInfo = async () => {
+    const fetchHomePageInfo = async () => {
       try {
         const response = await fetch("/main/home_info");
         if (response.ok) {
           const data = await response.json();
-          setMainPageInfo(data);
+          setHomePageInfo(data);
         } else {
           throw new Error('Failed to fetch user info');
         }
@@ -19,7 +19,7 @@ const Homepage = () => {
       }
     };
 
-    fetchMainPageInfo();
+    fetchHomePageInfo();
   }, []);
     return (
       <div className="content">
